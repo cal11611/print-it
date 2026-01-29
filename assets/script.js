@@ -1,22 +1,43 @@
 const slides = [
 	{
 		"image":"slide1.jpg",
-		"tagLine":"Impressions tous formats <span>en boutique et en ligne</span>"
+		"tagLine":"Impressions tous formats <span>en boutique et en ligne</span>",
+		"img_alt":"Impression Print-it"
+		
 	},
 	{
 		"image":"slide2.jpg",
-		"tagLine":"Tirages haute définition grand format <span>pour vos bureaux et events</span>"
+		"tagLine":"Tirages haute définition grand format <span>pour vos bureaux et events</span>",
+		"alt":"Bureau Print-it"
 	},
 	{
 		"image":"slide3.jpg",
-		"tagLine":"Grand choix de couleurs <span>de CMJN aux pantones</span>"
+		"tagLine":"Grand choix de couleurs <span>de CMJN aux pantones</span>",
+		"alt":"Couleurs Print-it"
 	},
 	{
 		"image":"slide4.png",
-		"tagLine":"Autocollants <span>avec découpe laser sur mesure</span>"
+		"tagLine":"Autocollants <span>avec découpe laser sur mesure</span>",
+		"alt":"graphs Print-it"
 	}
 ]
-  
+
+function changeSlide(sens) {
+    numero +=sens
+	if (numero < 0 ) numero = slides.length - 1
+	if (numero > slides.length - 1 ) numero = 0
+	document.querySelector("#banner .banner-img").src = "./assets/images/slideshow/" + slides[numero].image
+	document.querySelector("#banner p").innerHTML = slides[numero].tagLine
+	let img_alt = document.querySelector("#banner .banner-img")
+	img_alt.setAttribute("alt", slides[numero].alt)
+	for (let i = 0; i < dots; i++) {
+		let selected = document.getElementById("dot" + i)
+		selected.setAttribute("class", "dot")
+	}
+	let selected = document.getElementById("dot" + numero)
+	selected.setAttribute("class", "dot_selected")
+}
+
 
 let dots = slides.length
 for (let i = 0 ; i < dots ; i ++)
@@ -31,37 +52,15 @@ for (let i = 0 ; i < dots ; i ++)
 let numero = 0	
 let selected = document.getElementById("dot" + numero)
 selected.setAttribute("class", "dot_selected")
-
-
- 
 let arrowLeft = document.querySelector("#banner .arrow_left")
 let arrowRight = document.querySelector("#banner .arrow_right")
-arrowLeft.addEventListener("click", function changSlide() {
-    numero -=1
-	if (numero < 0 ) numero = slides.length - 1
-	document.querySelector("#banner .banner-img").src = "./assets/images/slideshow/" + slides[numero].image
-	document.querySelector("#banner p").innerHTML = slides[numero].tagLine
 
 
-	for (let i = 0; i < dots; i++) {
-		let selected = document.getElementById("dot" + i)
-		selected.setAttribute("class", "dot")
-}
-	let selected = document.getElementById("dot" + numero)
-	selected.setAttribute("class", "dot_selected")
-})
-arrowRight.addEventListener("click", function changSlide() {
-    numero +=1
-	if (numero > slides.length - 1 ) numero = 0
-	document.querySelector("#banner .banner-img").src = "./assets/images/slideshow/" + slides[numero].image
-	document.querySelector("#banner p").innerHTML = slides[numero].tagLine
 
-	
-	for (let i = 0; i < dots; i++) {
-		let selected = document.getElementById("dot" + i)
-		selected.setAttribute("class", "dot")
-}
-	let selected = document.getElementById("dot" + numero)
-	selected.setAttribute("class", "dot_selected")
-})
+
+
+
+
+
+//setInterval("changeSlide(1)", 4000)
 
